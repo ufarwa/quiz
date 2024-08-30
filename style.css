@@ -1,0 +1,136 @@
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Styling */
+.quiz-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Title */
+h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Questions and Options */
+.question {
+    margin-bottom: 25px;
+}
+
+.question h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.options div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.options input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    accent-color: #2a5298; /* Customize the radio button color */
+}
+
+.options label {
+    font-size: 16px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.options label:hover {
+    color: #2a5298;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #2a5298;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #1e3c72;
+    transform: scale(1.05);
+}
+
+/* Result Styling */
+#result {
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1e3c72;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .quiz-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .question h3 {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    #result {
+        font-size: 18px;
+    }
+}

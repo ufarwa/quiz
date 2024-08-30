@@ -51,20 +51,30 @@ const questions = [
     }
 ];
 
+let userName = "";
+
+function startQuiz() {
+    userName = document.getElementById("user-name").value;
+    if (!userName) {
+        alert("Please enter your name.");
+        return;
+    }
+    document.getElementById("home-page").classList.add("d-none");
+    document.getElementById("quiz-page").classList.remove("d-none");
+    generateQuiz();
+}
+
 function generateQuiz() {
-    const quizContainer = document.getElementById("quiz");
+    const quizContainer = document.getElementById("quiz-form");
     quizContainer.innerHTML = "";
 
     questions.forEach((question, index) => {
         const questionElement = document.createElement("div");
-        questionElement.classList.add("question");
+        questionElement.classList.add("mb-3");
 
-        const questionTitle = document.createElement("h3");
+        const questionTitle = document.createElement("h5");
         questionTitle.textContent = `${index + 1}. ${question.question}`;
         questionElement.appendChild(questionTitle);
-
-        const optionsContainer = document.createElement("div");
-        optionsContainer.classList.add("options");
 
         question.options.forEach((option, optionIndex) => {
             const optionElement = document.createElement("div");
@@ -79,10 +89,9 @@ function generateQuiz() {
             optionLabel.textContent = option;
             optionElement.appendChild(optionLabel);
 
-            optionsContainer.appendChild(optionElement);
+            questionElement.appendChild(optionElement);
         });
 
-        questionElement.appendChild(optionsContainer);
         quizContainer.appendChild(questionElement);
     });
 }
@@ -96,10 +105,31 @@ function submitQuiz() {
         }
     });
 
-    const resultContainer = document.getElementById("result");
-    resultContainer.textContent = `You scored ${score} out of ${questions.length}`;
+    document.getElementById("quiz-page").classList.add("d-none");
+    document.getElementById("result-page").classList.remove("d-none");
+    displayResult(score);
 }
 
-window.onload = function () {
-    generateQuiz();
-};
+function displayResult(score) {
+    const resultContainer = document.getElementById("result");
+    const resultTitle = document.getElementById("result-title");
+
+    resultTitle.textContent = `${userName}, you scored ${score} out of ${questions.length}`;
+    
+    let comment;
+    if (score === questions.length) {
+        comment = "Excellent job!";
+    } else if (score >= questions.length / 2) {
+        comment = "Good effort!";
+    } else {
+        comment = "Keep trying!";
+    }
+    
+    resultContainer.textContent = comment;
+}
+
+function restartQuiz() {
+    document.getElementById("result-page").classList.add("d-none");
+    document.getElementById("home-page").classList.remove("d-none");
+    document.getElementById("user-name").value = "";
+}
